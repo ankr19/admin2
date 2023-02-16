@@ -36,7 +36,7 @@ function Dashboard() {
                     <ul className={style} id="accordionSidebar">
 
                         {/*  <!-- Sidebar - Brand --> done */}
-                        <a className="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                        <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/">
                             <div className="sidebar-brand-icon rotate-n-15">
                                 {/* <i className="fas fa-laugh-wink"></i> */}
                             </div>
@@ -44,7 +44,7 @@ function Dashboard() {
                             <div className="text-center d-none d-md-inline">
                                 <button className="mx-2 rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>
                             </div>
-                        </a>
+                        </Link>
 
                         {/*   <!-- Divider --> */}
                         <hr className="sidebar-divider my-0" />
