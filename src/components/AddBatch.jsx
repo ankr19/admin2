@@ -1,13 +1,18 @@
 import React from 'react'
 
-const AddManu = () => {
-    // adding manufacturer name and password
-    const [manu, setManu] = React.useState({ Mname: "", password: "" });
-
+const AddBatch = () => {
+    const [batch, setBatch] = React.useState({ Bname: "" })
+    const [manu, setManu] = React.useState(["One", "Two", "Three"])
+    const [selManu, setSelManu] = React.useState({ manu: "" });
     // handle Change
     const handleChange = (e) => {
         // console.log()
-        setManu({ ...manu, [e.target.name]: e.target.value })
+        setBatch({ ...batch, [e.target.name]: e.target.value })
+    }
+
+    const handleSeleted = (e) => {
+        setSelManu({ ...selManu, [e.target.name]: e.target.value });
+        console.log({[e.target.name]: e.target.value})
     }
 
     // handling submitting 
@@ -16,9 +21,11 @@ const AddManu = () => {
     }
 
     // handling Clicking
-    const handleClick = ()=>{
-        console.log(manu);
-        setManu({Mname:"",password: ""})
+    const handleClick = () => {
+        console.log(batch);
+        console.log(selManu);
+        setBatch({ Bname: "" });
+        setSelManu({manu:""})
     }
     return (
         <div className='container'>
@@ -29,26 +36,23 @@ const AddManu = () => {
                             <label htmlFor="Mname" className="col-form-label primary">Manufacture Name</label>
                         </div>
                         <div className="col-auto">
-                            <input
-                                name='Mname'
-                                type="text"
-                                className="form-control"
-                                onChange={(e) => { handleChange(e) }}
-                                value={manu.Mname}
-                            />
+                            <select name='manu' onChange={(e) => { handleSeleted(e) }} className="form-select" aria-label="Default select example">
+                                {/* <option select="true">Open this select menu</option> */}
+                                {manu.map((val, key) => { return (<option select="true" key={key}>{val}</option>) })}
+                            </select>
                         </div>
                     </div>
                     <div className='row align-item-center my-2'>
                         <div className="col-auto">
-                            <label htmlFor="password" className="col-form-label primary mx-4">Password</label>
+                            <label htmlFor="password" className="col-form-label primary mx-3">Batch Name</label>
                         </div>
                         <div className="col-auto mx-3">
                             <input
-                                name="password"
-                                type="password"
+                                name="Bname"
+                                type="text"
                                 className="form-control"
-                                onChange={(e) => { handleChange(e) }} 
-                                value={manu.password}
+                                onChange={(e) => { handleChange(e) }}
+                                value={batch.Bname}
                             />
                         </div>
                     </div>
@@ -63,4 +67,4 @@ const AddManu = () => {
     )
 }
 
-export default AddManu
+export default AddBatch

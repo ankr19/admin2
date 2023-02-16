@@ -1,4 +1,5 @@
 import React from 'react';
+import AddBatch from './components/AddBatch';
 import AddManu from './components/AddManu';
 // import Sidebar from './components/Sidebar';
 import './Dashboard.css';
@@ -25,7 +26,7 @@ function Dashboard() {
 
     return (
         <div>
-            <body id="page-top">
+            <div id="page-top">
 
                 {/*  <!-- Page Wrapper --> */}
                 <div id="wrapper">
@@ -510,6 +511,25 @@ function Dashboard() {
                                             {/*  <!-- Card Header - Dropdown --> */}
                                             <div
                                                 className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                <h6 className="m-0 font-weight-bold text-primary">Adding Batch</h6>
+                                                
+                                            </div>
+                                            {/*  <!-- Card Body --> */}
+                                            <div className="card-body">
+                                                
+                                                <div className="mt-4 text-center small">
+                                                    {/*  */}
+                                                    <AddBatch />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* Third Component */}
+                                    <div className="col-xl-4 col-lg-5">
+                                        <div className="card shadow mb-4">
+                                            {/*  <!-- Card Header - Dropdown --> */}
+                                            <div
+                                                className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                                 <h6 className="m-0 font-weight-bold text-primary">Adding Esp</h6>
                                                 
                                             </div>
@@ -523,7 +543,7 @@ function Dashboard() {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* Third Component */}
+                                    {/* Fourth Component */}
                                     <div className="col-xl-4 col-lg-5">
                                         <div className="card shadow mb-4">
                                             {/*  <!-- Card Header - Dropdown --> */}
@@ -637,7 +657,7 @@ function Dashboard() {
                                 <!-- Scroll to Top Button--> */}
  
 
-            </body>
+            </div>
         </div>
     )
 }
