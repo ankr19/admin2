@@ -75,7 +75,7 @@ const AddBatch = () => {
                     </div>
                     <div className='row align-item-center my-2'>
                         <div className="col-auto">
-                            <label htmlFor="password" className="col-form-label primary mx-3">Batch Name</label>
+                            <label htmlFor="password" className="col-form-label primary mx-3 pr-1">Batch Name</label>
                         </div>
                         <div className="col-auto mx-2">
                             <input

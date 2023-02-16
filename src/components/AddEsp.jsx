@@ -2,12 +2,12 @@ import React from 'react'
 
 const AddEsp = () => {
     // adding manufacturer name and password
-    const [manu, setManu] = React.useState({ Mname: "", password: "" });
-
+    // const [manu, setManu] = React.useState([]);
+    const [esp, setEsp] = React.useState({espname:"", espid:""})
     // handle Change
     const handleChange = (e) => {
         // console.log()
-        setManu({ ...manu, [e.target.name]: e.target.value })
+        setEsp({ ...esp, [e.target.name]: e.target.value })
     }
 
     // handling submitting 
@@ -17,8 +17,8 @@ const AddEsp = () => {
 
     // handling Clicking
     const handleClick = () => {
-        console.log(manu);
-        setManu({ Mname: "", password: "" })
+        console.log(esp);
+        setEsp({ espname: "", espid: "" })
     }
     return (
         <div className='container'>
@@ -26,29 +26,29 @@ const AddEsp = () => {
                 <div className="row g-3 align-items-center">
                     <div className='row align-item-center'>
                         <div className="col-auto">
-                            <label htmlFor="Mname" className="col-form-label primary">Manufacture Name</label>
+                            <label htmlFor="espname" className="col-form-label primary mx-3 ">Esp Name</label>
                         </div>
                         <div className="col-auto">
                             <input
-                                name='Mname'
+                                name='espname'
                                 type="text"
                                 className="form-control"
                                 onChange={(e) => { handleChange(e) }}
-                                value={manu.Mname}
+                                value={esp.espname}
                             />
                         </div>
                     </div>
                     <div className='row align-item-center my-2'>
                         <div className="col-auto">
-                            <label htmlFor="password" className="col-form-label primary mx-4">Password</label>
+                            <label htmlFor="espid" className="col-form-label primary mx-3 pr-2">Esp Id    </label>
                         </div>
                         <div className="col-auto mx-3">
                             <input
-                                name="password"
-                                type="password"
+                                name="espid"
+                                type="text"
                                 className="form-control"
                                 onChange={(e) => { handleChange(e) }}
-                                value={manu.password}
+                                value={esp.espid}
                             />
                         </div>
                     </div>

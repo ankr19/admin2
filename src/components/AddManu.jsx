@@ -26,7 +26,7 @@ const AddManu = () => {
                 <div className="row g-3 align-items-center">
                     <div className='row align-item-center'>
                         <div className="col-auto">
-                            <label htmlFor="Mname" className="col-form-label primary">Manufacture Name</label>
+                            <label htmlFor="Mname" className="col-form-label primary pr-1">Manufacture Name</label>
                         </div>
                         <div className="col-auto">
                             <input
