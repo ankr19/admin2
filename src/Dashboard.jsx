@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AddBatch from './components/AddBatch';
 import AddEsp from './components/AddEsp';
 import AddManu from './components/AddManu';
+import Addpic from './components/Addpic';
 // import Sidebar from './components/Sidebar';
 import './Dashboard.css';
 
@@ -562,7 +563,7 @@ function Dashboard() {
                                                 
                                                 <div className="mt-4 text-center small">
                                                     {/*  */}
-                                                    <AddManu/>
+                                                    <Addpic />
                                                 </div>
                                             </div>
                                         </div>
