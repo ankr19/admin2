@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AddBatch from './components/AddBatch';
 import AddManu from './components/AddManu';
 // import Sidebar from './components/Sidebar';
@@ -72,9 +73,12 @@ function Dashboard() {
                             </a>
                             <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                                 <div className="bg-white py-2 collapse-inner rounded">
-                                    <h6 className="collapse-header">Custom Components:</h6>
-                                    <a className="collapse-item" href="buttons.html">Buttons</a>
-                                    <a className="collapse-item" href="cards.html">Cards</a>
+                                    <Link className="collapse-item" to="/admin/manufacture" >Manufacture</Link>
+                                    <Link className="collapse-item" to="/admin/batches" >Batch</Link>
+                                    <Link className="collapse-item" to="/admin/pics" >Pics</Link>
+                                    <Link className="collapse-item" to="/admin/esps" >Esps</Link>
+                                    {/* <a className="collapse-item" href="buttons.html">Buttons</a>
+                                    <a className="collapse-item" href="cards.html">Cards</a> */}
                                 </div>
                             </div>
                         </li>

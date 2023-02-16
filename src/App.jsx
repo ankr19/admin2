@@ -1,14 +1,20 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import './App.css'
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Manufacture from './components/Manufacture/Manufacture'
 import Dashboard from './Dashboard'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <div>
-      <Dashboard/>
+      <Routes>
+        <Route path="/" element={<Dashboard/>} />
+        <Route path='/admin/manufacture' element={<Manufacture/>} />
+        <Route path='/admin/batches' element={<Manufacture/>} />
+        <Route path='/admin/esps' element={<Manufacture/>} />
+        <Route path='/admin/pics' element={<Manufacture/>} />
+      </Routes>
+      
     </div>
   )
 }

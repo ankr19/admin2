@@ -1,25 +1,29 @@
 import React from 'react'
 import manuf from '../JSON/Manufacture.json'
+import Alert from './Alert';
 const AddBatch = () => {
     const [batch, setBatch] = React.useState({ Bname: "" })
     const [manu, setManu] = React.useState([]);
     const [selManu, setSelManu] = React.useState({ manu: "" });
     const [selId, setSelId] = React.useState("");
-
-    React.useEffect(()=>{
+    const [alert, setAlert] = React.useState(null);
+    
+    React.useEffect(() => {
         setManu(manuf.manufacture);
-    },[])
+        
+    }, [])
     // handle Change
     const handleChange = (e) => {
         // console.log()
         setBatch({ ...batch, [e.target.name]: e.target.value })
+        // setAlert(null);
     }
 
     const handleSeleted = (e) => {
         setSelManu({ ...selManu, [e.target.name]: e.target.value });
-        console.log({[e.target.name]: e.target.value})
-        manuf.manufacture.map((val)=>{
-            if(val.name===e.target.value){
+        console.log({ [e.target.name]: e.target.value })
+        manuf.manufacture.map((val) => {
+            if (val.name === e.target.value) {
                 setSelId(val.id);
             }
         })
@@ -28,6 +32,7 @@ const AddBatch = () => {
     // handling submitting 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setAlert(null);
     }
 
     // handling Clicking
@@ -35,12 +40,26 @@ const AddBatch = () => {
         console.log(batch);
         console.log(selManu);
         console.log(selId);
-        setBatch({ Bname: "" });
         
+        if (batch.Bname && selId) {
+            setAlert({
+                type: "success",
+                msg: "added the batch"
+            });
+        }
+        else {
+            setAlert({
+                type: "danger",
+                msg: "batch is not added"
+            });
+        }
+        setBatch({ Bname: "" });
+        // setAlert(null);
         // setSelManu({manu:""})
     }
     return (
         <div className='container'>
+            <Alert alert={alert} />
             <form onSubmit={(e) => { handleSubmit(e) }}>
                 <div className="row g-3 align-items-center">
                     <div className='row align-item-center'>
