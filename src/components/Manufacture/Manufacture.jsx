@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import AddBatch from '../AddBatch';
 import AddManu from '../AddManu';
 import '../../Dashboard.css';
+import Mtable from './Mtable';
+import MBatch from './MBatch';
 
 const Manufacture = () => {
-  const [style, setStyle] = React.useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
+    const [manu, setManu] = React.useState("");
+    const [id, setId] = React.useState("");
+    const [view, setView] = React.useState(false);
+    const [style, setStyle] = React.useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
 
     const changeStyle = () => {
         if (style == "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion") {
@@ -23,162 +28,174 @@ const Manufacture = () => {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion")
         }
     };
-  return (
-    <div>
-       <div>
-            <div id="page-top">
 
-                {/*  <!-- Page Wrapper --> */}
-                <div id="wrapper">
+    const manuf = (value)=>{
+        console.log(value);
+        setManu(value.name);
+        setId(value.id);
+        if(view && (value.name==manu)){
+            setView(false);
+        }
+        else{
+            setView(true);
+        }
+    }
+    return (
+        <div>
+            <div>
+                <div id="page-top">
 
-                    {/*  <!-- Sidebar --> */}
-                    <ul className={style} id="accordionSidebar">
+                    {/*  <!-- Page Wrapper --> */}
+                    <div id="wrapper">
 
-                        {/*  <!-- Sidebar - Brand --> done */}
-                        <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/">
-                            <div className="sidebar-brand-icon rotate-n-15">
-                                {/* <i className="fas fa-laugh-wink"></i> */}
+                        {/*  <!-- Sidebar --> */}
+                        <ul className={style} id="accordionSidebar">
+
+                            {/*  <!-- Sidebar - Brand --> done */}
+                            <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/">
+                                <div className="sidebar-brand-icon rotate-n-15">
+                                    {/* <i className="fas fa-laugh-wink"></i> */}
+                                </div>
+                                <div className="sidebar-brand-text mx-3">Admin</div>
+                                <div className="text-center d-none d-md-inline">
+                                    <button className="mx-2 rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>
+                                </div>
+                            </Link>
+
+                            {/*   <!-- Divider --> */}
+                            <hr className="sidebar-divider my-0" />
+
+                            {/*  <!-- Nav Item - Dashboard  done --> */}
+                            <li className="nav-item active">
+                                <a className="nav-link" >
+                                    <i className="fas fa-fw fa-tachometer-alt"></i>
+                                    <span>Dashboard</span></a>
+                            </li>
+
+                            {/*  <!-- Divider --> */}
+                            <hr className="sidebar-divider" />
+
+                            {/*   <!-- Heading --> */}
+                            <div className="sidebar-heading">
+                                Interface
                             </div>
-                            <div className="sidebar-brand-text mx-3">Admin</div>
-                            <div className="text-center d-none d-md-inline">
-                                <button className="mx-2 rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>
-                            </div>
-                        </Link>
 
-                        {/*   <!-- Divider --> */}
-                        <hr className="sidebar-divider my-0" />
-
-                        {/*  <!-- Nav Item - Dashboard  done --> */}
-                        <li className="nav-item active">
-                            <a className="nav-link" >
-                                <i className="fas fa-fw fa-tachometer-alt"></i>
-                                <span>Dashboard</span></a>
-                        </li>
-
-                        {/*  <!-- Divider --> */}
-                        <hr className="sidebar-divider" />
-
-                        {/*   <!-- Heading --> */}
-                        <div className="sidebar-heading">
-                            Interface
-                        </div>
-
-                        {/*  <!-- Nav Item - Pages Collapse Menu done --> */}
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                                aria-expanded="true" aria-controls="collapseTwo">
-                                <i className="fas fa-fw fa-cog"></i>
-                                <span>Components</span>
-                            </a>
-                            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                                <div className="bg-white py-2 collapse-inner rounded">
-                                    <Link className="collapse-item" to="/admin/manufacture" >Manufacture</Link>
-                                    <Link className="collapse-item" to="/admin/batches" >Batch</Link>
-                                    <Link className="collapse-item" to="/admin/pics" >Pics</Link>
-                                    <Link className="collapse-item" to="/admin/esps" >Esps</Link>
-                                    {/* <a className="collapse-item" href="buttons.html">Buttons</a>
+                            {/*  <!-- Nav Item - Pages Collapse Menu done --> */}
+                            <li className="nav-item">
+                                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="true" aria-controls="collapseTwo">
+                                    <i className="fas fa-fw fa-cog"></i>
+                                    <span>Components</span>
+                                </a>
+                                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                    <div className="bg-white py-2 collapse-inner rounded">
+                                        <Link className="collapse-item" to="/admin/manufacture" >Manufacture</Link>
+                                        <Link className="collapse-item" to="/admin/batches" >Batch</Link>
+                                        <Link className="collapse-item" to="/admin/pics" >Pics</Link>
+                                        <Link className="collapse-item" to="/admin/esps" >Esps</Link>
+                                        {/* <a className="collapse-item" href="buttons.html">Buttons</a>
                                     <a className="collapse-item" href="cards.html">Cards</a> */}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
 
-                        {/* <!-- Nav Item - Utilities Collapse Menu --> */}
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                                aria-expanded="true" aria-controls="collapseUtilities">
-                                <i className="fas fa-fw fa-wrench"></i>
-                                <span>Utilities</span>
-                            </a>
-                            <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities"
-                                data-parent="#accordionSidebar">
-                                <div className="bg-white py-2 collapse-inner rounded">
-                                    <h6 className="collapse-header">Custom Utilities:</h6>
-                                    <a className="collapse-item" href="utilities-color.html">Colors</a>
-                                    <a className="collapse-item" href="utilities-border.html">Borders</a>
-                                    <a className="collapse-item" href="utilities-animation.html">Animations</a>
-                                    <a className="collapse-item" href="utilities-other.html">Other</a>
+                            {/* <!-- Nav Item - Utilities Collapse Menu --> */}
+                            <li className="nav-item">
+                                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                                    aria-expanded="true" aria-controls="collapseUtilities">
+                                    <i className="fas fa-fw fa-wrench"></i>
+                                    <span>Utilities</span>
+                                </a>
+                                <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities"
+                                    data-parent="#accordionSidebar">
+                                    <div className="bg-white py-2 collapse-inner rounded">
+                                        <h6 className="collapse-header">Custom Utilities:</h6>
+                                        <a className="collapse-item" href="utilities-color.html">Colors</a>
+                                        <a className="collapse-item" href="utilities-border.html">Borders</a>
+                                        <a className="collapse-item" href="utilities-animation.html">Animations</a>
+                                        <a className="collapse-item" href="utilities-other.html">Other</a>
+                                    </div>
                                 </div>
+                            </li>
+
+                            {/*  <!-- Divider --> */}
+                            <hr className="sidebar-divider" />
+
+                            {/* <!-- Heading --> */}
+                            <div className="sidebar-heading">
+                                Addons
                             </div>
-                        </li>
 
-                        {/*  <!-- Divider --> */}
-                        <hr className="sidebar-divider" />
-
-                        {/* <!-- Heading --> */}
-                        <div className="sidebar-heading">
-                            Addons
-                        </div>
-
-                        {/*  <!-- Nav Item - Pages Collapse Menu --> */}
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                                aria-expanded="true" aria-controls="collapsePages">
-                                <i className="fas fa-fw fa-folder"></i>
-                                <span>Pages</span>
-                            </a>
-                            <div id="collapsePages" className="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                                <div className="bg-white py-2 collapse-inner rounded">
-                                    <h6 className="collapse-header">Login Screens:</h6>
-                                    <a className="collapse-item" href="">Login</a>
-                                    <a className="collapse-item" href="">Register</a>
-                                    <a className="collapse-item" href="">Forgot Password</a>
-                                    <div className="collapse-divider"></div>
-                                    <h6 className="collapse-header">Other Pages:</h6>
-                                    <a className="collapse-item" href="404.html">404 Page</a>
-                                    <a className="collapse-item" href="blank.html">Blank Page</a>
+                            {/*  <!-- Nav Item - Pages Collapse Menu --> */}
+                            <li className="nav-item">
+                                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                                    aria-expanded="true" aria-controls="collapsePages">
+                                    <i className="fas fa-fw fa-folder"></i>
+                                    <span>Pages</span>
+                                </a>
+                                <div id="collapsePages" className="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                    <div className="bg-white py-2 collapse-inner rounded">
+                                        <h6 className="collapse-header">Login Screens:</h6>
+                                        <a className="collapse-item" href="">Login</a>
+                                        <a className="collapse-item" href="">Register</a>
+                                        <a className="collapse-item" href="">Forgot Password</a>
+                                        <div className="collapse-divider"></div>
+                                        <h6 className="collapse-header">Other Pages:</h6>
+                                        <a className="collapse-item" href="404.html">404 Page</a>
+                                        <a className="collapse-item" href="blank.html">Blank Page</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
 
-                        {/* <!-- Nav Item - Charts --> */}
-                        <li className="nav-item">
-                            <a className="nav-link" href="">
-                                <i className="fas fa-fw fa-chart-area"></i>
-                                <span>Charts</span></a>
-                        </li>
+                            {/* <!-- Nav Item - Charts --> */}
+                            <li className="nav-item">
+                                <a className="nav-link" href="">
+                                    <i className="fas fa-fw fa-chart-area"></i>
+                                    <span>Charts</span></a>
+                            </li>
 
-                        {/*  <!-- Nav Item - Tables --> */}
-                        <li className="nav-item">
-                            <a className="nav-link" href="">
-                                <i className="fas fa-fw fa-table"></i>
-                                <span>Tables</span></a>
-                        </li>
+                            {/*  <!-- Nav Item - Tables --> */}
+                            <li className="nav-item">
+                                <a className="nav-link" href="">
+                                    <i className="fas fa-fw fa-table"></i>
+                                    <span>Tables</span></a>
+                            </li>
 
-                        {/* <!-- Divider --> */}
-                        <hr className="sidebar-divider d-none d-md-block" />
+                            {/* <!-- Divider --> */}
+                            <hr className="sidebar-divider d-none d-md-block" />
 
-                        {/* <!-- Sidebar Toggler (Sidebar) --> */}
-                        {/* <div className="text-center d-none d-md-inline">
+                            {/* <!-- Sidebar Toggler (Sidebar) --> */}
+                            {/* <div className="text-center d-none d-md-inline">
                             <button className="rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>
                         </div> */}
 
-                        {/*  <!-- Sidebar Message --> */}
-                        {/* <div className="sidebar-card d-none d-lg-flex">
+                            {/*  <!-- Sidebar Message --> */}
+                            {/* <div className="sidebar-card d-none d-lg-flex">
                             <img className="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="..." />
                             <p className="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
                             <a className="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
                         </div> */}
 
-                    </ul>
-                    {/* <Sidebar/> */}
-                    {/*  <!-- End of Sidebar --> */}
+                        </ul>
+                        {/* <Sidebar/> */}
+                        {/*  <!-- End of Sidebar --> */}
 
-                    {/*  <!-- Content Wrapper --> */}
-                    <div id="content-wrapper" className="d-flex flex-column">
+                        {/*  <!-- Content Wrapper --> */}
+                        <div id="content-wrapper" className="d-flex flex-column">
 
-                        {/*  <!-- Main Content --> */}
-                        <div id="content">
+                            {/*  <!-- Main Content --> */}
+                            <div id="content">
 
-                            {/*  <!-- Topbar done --> */}
-                            <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                                {/*  <!-- Topbar done --> */}
+                                <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                                {/*  <!-- Sidebar Toggle (Topbar) --> */}
-                                <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3" onClick={changeStyle1}>
-                                    <i className="fa fa-bars"></i>
-                                </button>
+                                    {/*  <!-- Sidebar Toggle (Topbar) --> */}
+                                    <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3" onClick={changeStyle1}>
+                                        <i className="fa fa-bars"></i>
+                                    </button>
 
-                                {/*  <!-- Topbar Search --> */}
-                                {/* <form
+                                    {/*  <!-- Topbar Search --> */}
+                                    {/* <form
                                     className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                     <div className="input-group">
                                         <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..."
@@ -191,17 +208,17 @@ const Manufacture = () => {
                                     </div>
                                 </form> */}
 
-                                {/*  <!-- Topbar Navbar --> */}
-                                <ul className="navbar-nav ml-auto">
+                                    {/*  <!-- Topbar Navbar --> */}
+                                    <ul className="navbar-nav ml-auto">
 
-                                    {/*  <!-- Nav Item - Search Dropdown (Visible Only XS) --> */}
-                                    {/* <li className="nav-item dropdown no-arrow d-sm-none">
+                                        {/*  <!-- Nav Item - Search Dropdown (Visible Only XS) --> */}
+                                        {/* <li className="nav-item dropdown no-arrow d-sm-none">
                                         <a className="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i className="fas fa-search fa-fw"></i>
                                         </a> */}
-                                    {/* <!-- Dropdown - Messages --> */}
-                                    {/* <div className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                        {/* <!-- Dropdown - Messages --> */}
+                                        {/* <div className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                             aria-labelledby="searchDropdown">
                                             <form className="form-inline mr-auto w-100 navbar-search">
                                                 <div className="input-group">
@@ -218,21 +235,21 @@ const Manufacture = () => {
                                         </div>
                                     </li> */}
 
-                                    {/*  <!-- Nav Item - Alerts --> */}
-                                    <li className="nav-item dropdown no-arrow mx-1">
-                                        {/* <a className="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" */}
-                                        {/* // data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {/*  <!-- Nav Item - Alerts --> */}
+                                        <li className="nav-item dropdown no-arrow mx-1">
+                                            {/* <a className="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" */}
+                                            {/* // data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             // <i className="fas fa-bell fa-fw"></i>
                                             // {/*  <!-- Counter - Alerts -->
                                             // <span className="badge badge-danger badge-counter">3+</span> */}
-                                        {/* </a> */}
-                                        {/*   <!-- Dropdown - Alerts --> */}
-                                        <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                            aria-labelledby="alertsDropdown">
-                                            {/* <h6 className="dropdown-header">
+                                            {/* </a> */}
+                                            {/*   <!-- Dropdown - Alerts --> */}
+                                            <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                                aria-labelledby="alertsDropdown">
+                                                {/* <h6 className="dropdown-header">
                                                 Alerts Center
                                             </h6> */}
-                                            {/* <a className="dropdown-item d-flex align-items-center" href="#">
+                                                {/* <a className="dropdown-item d-flex align-items-center" href="#">
                                                 <div className="mr-3">
                                                     <div className="icon-circle bg-primary">
                                                         <i className="fas fa-file-alt text-white"></i>
@@ -243,7 +260,7 @@ const Manufacture = () => {
                                                     <span className="font-weight-bold">A new monthly report is ready to download!</span>
                                                 </div>
                                             </a> */}
-                                            {/* <a className="dropdown-item d-flex align-items-center" href="#">
+                                                {/* <a className="dropdown-item d-flex align-items-center" href="#">
                                                 <div className="mr-3">
                                                     <div className="icon-circle bg-success">
                                                         <i className="fas fa-donate text-white"></i>
@@ -254,7 +271,7 @@ const Manufacture = () => {
                                                     $290.29 has been deposited into your account!
                                                 </div>
                                             </a> */}
-                                            {/* <a className="dropdown-item d-flex align-items-center" href="#">
+                                                {/* <a className="dropdown-item d-flex align-items-center" href="#">
                                                 <div className="mr-3">
                                                     <div className="icon-circle bg-warning">
                                                         <i className="fas fa-exclamation-triangle text-white"></i>
@@ -265,20 +282,20 @@ const Manufacture = () => {
                                                     Spending Alert: We've noticed unusually high spending for your account.
                                                 </div>
                                             </a> */}
-                                            {/* <a className="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> */}
-                                        </div>
-                                    </li>
+                                                {/* <a className="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> */}
+                                            </div>
+                                        </li>
 
-                                    {/*  <!-- Nav Item - Messages --> */}
-                                    <li className="nav-item dropdown no-arrow mx-1">
-                                        {/* <a className="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                        {/*  <!-- Nav Item - Messages --> */}
+                                        <li className="nav-item dropdown no-arrow mx-1">
+                                            {/* <a className="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i className="fas fa-envelope fa-fw"></i> */}
-                                        {/*  <!-- Counter - Messages --> */}
-                                        {/* <span className="badge badge-danger badge-counter">7</span>
+                                            {/*  <!-- Counter - Messages --> */}
+                                            {/* <span className="badge badge-danger badge-counter">7</span>
                                         </a> */}
-                                        {/*   <!-- Dropdown - Messages --> */}
-                                        {/* <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                            {/*   <!-- Dropdown - Messages --> */}
+                                            {/* <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                             aria-labelledby="messagesDropdown">
                                             <h6 className="dropdown-header">
                                                 Message Center
@@ -333,337 +350,104 @@ const Manufacture = () => {
                                             </a>
                                             <a className="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                                         </div>*/}
-                                    </li>
+                                        </li>
 
-                                    <div className="topbar-divider d-none d-sm-block"></div>
+                                        <div className="topbar-divider d-none d-sm-block"></div>
 
-                                    {/* <!-- Nav Item - User Information --> */}
-                                    <li className="nav-item dropdown no-arrow">
-                                        <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span className="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                            <img className="img-profile rounded-circle"
-                                                src="/img/undraw_profile.svg" />
-                                        </a>
-                                        {/*  <!-- Dropdown - User Information --> */}
-                                        <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                            aria-labelledby="userDropdown">
-                                            <a className="dropdown-item" href="#">
-                                                <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Profile
+                                        {/* <!-- Nav Item - User Information --> */}
+                                        <li className="nav-item dropdown no-arrow">
+                                            <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span className="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                                <img className="img-profile rounded-circle"
+                                                    src="/img/undraw_profile.svg" />
                                             </a>
-                                            <a className="dropdown-item" href="#">
-                                                <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Settings
-                                            </a>
-                                            <a className="dropdown-item" href="#">
-                                                <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Activity Log
-                                            </a>
-                                            <div className="dropdown-divider"></div>
-                                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                                <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Logout
-                                            </a>
-                                        </div>
-                                    </li>
+                                            {/*  <!-- Dropdown - User Information --> */}
+                                            <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                                aria-labelledby="userDropdown">
+                                                <a className="dropdown-item" href="#">
+                                                    <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Profile
+                                                </a>
+                                                <a className="dropdown-item" href="#">
+                                                    <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Settings
+                                                </a>
+                                                <a className="dropdown-item" href="#">
+                                                    <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Activity Log
+                                                </a>
+                                                <div className="dropdown-divider"></div>
+                                                <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                                    <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Logout
+                                                </a>
+                                            </div>
+                                        </li>
 
-                                </ul>
+                                    </ul>
 
-                            </nav>
-                            {/*  <!-- End of Topbar --> */}
+                                </nav>
+                                {/*  <!-- End of Topbar --> */}
 
-                            {/* <!-- Begin Page Content --> */}
-                            <div className="container-fluid">
+                                {/* <!-- Begin Page Content --> */}
+                                <div className="container-fluid">
 
-                                {/*  <!-- Page Heading --> */}
-                                <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                                    <h1 className="h3 mb-0 text-gray-800">Manufacturer</h1>
-                                    {/* <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                    {/*  <!-- Page Heading --> */}
+                                    <div className="d-sm-flex align-items-center justify-content-between mb-4">
+                                        <h1 className="h3 mb-0 text-gray-800">Manufacturer</h1>
+                                        {/* <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                         className="fas fa-download fa-sm text-white-50"></i> Generate Report</a> */}
-                                </div>
-
-                                {/*  <!-- Content Row --> */}
-                                <div className="row">
-
-                                    {/*  <!-- Earnings (Monthly) Card Example --> */}
-                                    {/* <div className="col-xl-3 col-md-6 mb-4">
-                                        <div className="card border-left-primary shadow h-100 py-2">
-                                            <div className="card-body">
-                                                <div className="row no-gutters align-items-center">
-                                                    <div className="col mr-2">
-                                                        <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Earnings (Monthly)</div>
-                                                        <div className="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <i className="fas fa-calendar fa-2x text-gray-300"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
-
-                                    {/*  <!-- Earnings (Monthly) Card Example --> */}
-                                    {/* <div className="col-xl-3 col-md-6 mb-4">
-                                        <div className="card border-left-success shadow h-100 py-2">
-                                            <div className="card-body">
-                                                <div className="row no-gutters align-items-center">
-                                                    <div className="col mr-2">
-                                                        <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                            Earnings (Annual)</div>
-                                                        <div className="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <i className="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
-
-                                    {/*  <!-- Earnings (Monthly) Card Example --> */}
-                                    {/* <div className="col-xl-3 col-md-6 mb-4">
-                                        <div className="card border-left-info shadow h-100 py-2">
-                                            <div className="card-body">
-                                                <div className="row no-gutters align-items-center">
-                                                    <div className="col mr-2">
-                                                        <div className="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                                        </div>
-                                                        <div className="row no-gutters align-items-center">
-                                                            <div className="col-auto">
-                                                                <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                            </div>
-                                                            <div className="col">
-                                                                <div className="progress progress-sm mr-2">
-                                                                    <div className="progress-bar bg-info a1" role="progressbar"
-                                                                    ></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <i className="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
-
-                                    {/*  <!-- Pending Requests Card Example --> */}
-                                    {/* <div className="col-xl-3 col-md-6 mb-4">
-                                        <div className="card border-left-warning shadow h-100 py-2">
-                                            <div className="card-body">
-                                                <div className="row no-gutters align-items-center">
-                                                    <div className="col mr-2">
-                                                        <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                            Pending Requests</div>
-                                                        <div className="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <i className="fas fa-comments fa-2x text-gray-300"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
-                                </div>
-
-                                {/*  <!-- Content Row --> */}
-
-                                <div className="row">
-
-                                    {/*   <!-- Area Chart --> */}
-                                    {/* <div className="col-xl-8 col-lg-7">
-                                        <div className="card shadow mb-4"> */}
-                                            {/*  <!-- Card Header - Dropdown --> */}
-                                            {/* <div
-                                                className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                <h6 className="m-0 font-weight-bold text-primary">Adding Manufacture</h6>
-                                            </div> */}
-                                            {/*  <!-- Card Body --> */}
-                                            {/* <div className="card-body">
-                                                <AddManu/>
-                                            </div>
-                                        </div>
-                                    </div> */}
-
-                                    {/*  <!-- Pie Chart --> */}
-                                    <div className="col-xl-4 col-lg-5">
-                                        <div className="card shadow mb-4">
-                                            {/*  <!-- Card Header - Dropdown --> */}
-                                            <div
-                                                className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                <h6 className="m-0 font-weight-bold text-primary">Adding Manufacture</h6>
-                                                
-                                            </div>
-                                            {/*  <!-- Card Body --> */}
-                                            <div className="card-body">
-                                                
-                                                <div className="mt-4 text-center small">
-                                                    {/*  */}
-                                                    <AddManu/>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
-                                    {/* Second Component */}
-                                    <div className="col-xl-4 col-lg-5">
-                                        <div className="card shadow mb-4">
-                                            {/*  <!-- Card Header - Dropdown --> */}
-                                            <div
-                                                className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                <h6 className="m-0 font-weight-bold text-primary">Adding Batch</h6>
-                                                
-                                            </div>
-                                            {/*  <!-- Card Body --> */}
-                                            <div className="card-body">
-                                                
-                                                <div className="mt-4 text-center small">
-                                                    {/*  */}
-                                                    <AddBatch />
+                                    {/*  <!-- Content Row --> */}
+                                    <div className="row">
+                                        <div className="col-lg-6 mb-4">
+
+                                            {/* <!-- Manufacturer --> */}
+                                            <div className="card shadow mb-4">
+                                                <div className="card-header py-3">
+                                                    <h6 className="m-0 font-weight-bold text-primary">Manufacturer Details</h6>
+                                                </div>
+                                                <div className="card-body">
+                                                    <Mtable manuf={manuf} mid={id} />
                                                 </div>
                                             </div>
+                                            
                                         </div>
-                                    </div>
-                                    {/* Third Component */}
-                                    <div className="col-xl-4 col-lg-5">
-                                        <div className="card shadow mb-4">
-                                            {/*  <!-- Card Header - Dropdown --> */}
-                                            <div
-                                                className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                <h6 className="m-0 font-weight-bold text-primary">Adding Esp</h6>
-                                                
+                                        <div className='col-lg-6 mb-4'>
+                                                {view && <MBatch Mname={manu} id={id}/>}
                                             </div>
-                                            {/*  <!-- Card Body --> */}
-                                            <div className="card-body">
-                                                
-                                                <div className="mt-4 text-center small">
-                                                    {/*  */}
-                                                    <AddManu/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* Fourth Component */}
-                                    <div className="col-xl-4 col-lg-5">
-                                        <div className="card shadow mb-4">
-                                            {/*  <!-- Card Header - Dropdown --> */}
-                                            <div
-                                                className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                <h6 className="m-0 font-weight-bold text-primary">Adding Pic</h6>
-                                                
-                                            </div>
-                                            {/*  <!-- Card Body --> */}
-                                            <div className="card-body">
-                                                
-                                                <div className="mt-4 text-center small">
-                                                    {/*  */}
-                                                    <AddManu/>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
-
-                                {/*   <!-- Content Row --> */}
-                                <div className="row">
-
-                                    {/*   <!-- Content Column --> */}
-                                    <div className="col-lg-6 mb-4">
-
-                                        
-
-                                        {/* <!-- Color System --> */}
-                                        <div className="row">
-                                            <div className="col-lg-6 mb-4">
-                                                <div className="card bg-primary text-white shadow">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 mb-4">
-                                                <div className="card bg-success text-white shadow">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 mb-4">
-                                                <div className="card bg-info text-white shadow">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 mb-4">
-                                                <div className="card bg-warning text-white shadow">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 mb-4">
-                                                <div className="card bg-danger text-white shadow">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 mb-4">
-                                                <div className="card bg-secondary text-white shadow">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 mb-4">
-                                                <div className="card bg-light text-black shadow">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 mb-4">
-                                                <div className="card bg-dark text-white shadow">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="col-lg-6 mb-4">
-
-                                        {/* <!-- Illustrations --> */}
-                                        <div className="card shadow mb-4">
-                                            <div className="card-header py-3">
-                                                <h6 className="m-0 font-weight-bold text-primary">Illustrations</h6>
-                                            </div>
-                                            <div className="card-body">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {/*   <!-- /.container-fluid --> */}
 
                             </div>
-                            {/*   <!-- /.container-fluid --> */}
-
-                        </div>
-                        {/*   <!-- End of Main Content -->
+                            {/*   <!-- End of Main Content -->
 
                                         <!-- Footer --> */}
-                        <footer className="sticky-footer bg-white">
-                            <div className="container my-auto">
-                                <div className="copyright text-center my-auto">
-                                    {/* <span>Copyright &copy; Your Website 2021</span> */}
+                            <footer className="sticky-footer bg-white">
+                                <div className="container my-auto">
+                                    <div className="copyright text-center my-auto">
+                                        {/* <span>Copyright &copy; Your Website 2021</span> */}
+                                    </div>
                                 </div>
-                            </div>
-                        </footer>
-                        {/* <!-- End of Footer --> */}
+                            </footer>
+                            {/* <!-- End of Footer --> */}
+
+                        </div>
+                        {/*  <!-- End of Content Wrapper --> */}
 
                     </div>
-                    {/*  <!-- End of Content Wrapper --> */}
-
-                </div>
-                {/*  <!-- End of Page Wrapper -->
+                    {/*  <!-- End of Page Wrapper -->
 
                                 <!-- Scroll to Top Button--> */}
- 
 
+
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Manufacture
