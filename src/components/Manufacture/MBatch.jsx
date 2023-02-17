@@ -1,7 +1,7 @@
 import React from 'react'
 import Batch from '../../JSON/Batch.json';
 const MBatch = (props) => {
-    const { Mname, id } = props;
+    const { Mname, id, bid } = props;
     let up = 0;
     const [batch, setBatch] = React.useState([]);
     const [pic, setPic] = React.useState("");
@@ -15,6 +15,10 @@ const MBatch = (props) => {
         })
         setBatch(ad);
     }, [id])
+    const handleClick = (e) =>{
+        // console.log(e);
+        bid(e);
+    }
     return (
         <div>
             <div className="card shadow mb-4">

@@ -5,13 +5,16 @@ import AddManu from '../AddManu';
 import '../../Dashboard.css';
 import Mtable from './Mtable';
 import MBatch from './MBatch';
+import MPic from './MPic';
 
 const Manufacture = () => {
     const [manu, setManu] = React.useState("");
     const [id, setId] = React.useState("");
+    const [bid, setBid] = React.useState("");
     const [view, setView] = React.useState(false);
+    const [pview, setPview] = React.useState(false);
     const [style, setStyle] = React.useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
-
+    const [batch, setBatch] = React.useState("");
     const changeStyle = () => {
         if (style == "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion") {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled");
@@ -29,15 +32,28 @@ const Manufacture = () => {
         }
     };
 
-    const manuf = (value)=>{
+    const manuf = (value) => {
         console.log(value);
         setManu(value.name);
         setId(value.id);
-        if(view && (value.name==manu)){
+        if (view && (value.name == manu)) {
             setView(false);
+            setPview(false);
         }
-        else{
+        else {
             setView(true);
+        }
+    }
+
+    const getBid = (value) => {
+        console.log(value);
+        setBatch(value.name);
+        setBid(value.id);
+        if (pview && (value.name == batch)) {
+            setPview(false);
+        }
+        else {
+            setPview(true);
         }
     }
     return (
@@ -413,13 +429,17 @@ const Manufacture = () => {
                                                     <Mtable manuf={manuf} mid={id} />
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <div className='col-lg-6 mb-4'>
-                                                {view && <MBatch Mname={manu} id={id}/>}
-                                            </div>
+                                            {view && <MBatch Mname={manu} bid={getBid} id={id} />}
+                                        </div>
+                                    </div>
+                                    <div className="col mb-4">
+                                        {pview && <MPic bid={bid} Bname={batch} />}
                                     </div>
                                 </div>
+
                                 {/*   <!-- /.container-fluid --> */}
 
                             </div>
