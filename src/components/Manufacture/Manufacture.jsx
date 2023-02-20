@@ -1,13 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import AddBatch from '../AddBatch';
-import AddManu from '../AddManu';
 import '../../Dashboard.css';
 import Mtable from './Mtable';
 import MBatch from './MBatch';
 import MPic from './MPic';
+import DataContext from '../../context/DataContext';
 
 const Manufacture = () => {
+    const context = React.useContext(DataContext);
+    const { allManu, manufacturer } = context;
+
+
+
+    const [manufacture, setManufacture] = React.useState(manufacturer);
+    React.useEffect(() => {
+        allManu();
+    }, [manufacture])
+
     const [manu, setManu] = React.useState("");
     const [id, setId] = React.useState("");
     const [bid, setBid] = React.useState("");
@@ -15,6 +24,8 @@ const Manufacture = () => {
     const [pview, setPview] = React.useState(false);
     const [style, setStyle] = React.useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
     const [batch, setBatch] = React.useState("");
+
+
     const changeStyle = () => {
         if (style == "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion") {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled");
@@ -27,6 +38,7 @@ const Manufacture = () => {
         if (style == "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion") {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled1");
         }
+
         else {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion")
         }
@@ -35,7 +47,7 @@ const Manufacture = () => {
     const manuf = (value) => {
         console.log(value);
         setManu(value.name);
-        setId(value.id);
+        setId(value['_id']);
         if (view && (value.name == manu)) {
             setView(false);
             setPview(false);
@@ -418,18 +430,9 @@ const Manufacture = () => {
 
                                     {/*  <!-- Content Row --> */}
                                     <div className="row">
+                                        {/* <!-- Manufacturer --> */}
                                         <div className="col-lg-6 mb-4">
-
-                                            {/* <!-- Manufacturer --> */}
-                                            <div className="card shadow mb-4">
-                                                <div className="card-header py-3">
-                                                    <h6 className="m-0 font-weight-bold text-primary">Manufacturer Details</h6>
-                                                </div>
-                                                <div className="card-body">
-                                                    <Mtable manuf={manuf} mid={id} />
-                                                </div>
-                                            </div>
-
+                                            <Mtable manufacturer={manufacturer} manuf={manuf} mid={id} />
                                         </div>
                                         <div className='col-lg-6 mb-4'>
                                             {view && <MBatch Mname={manu} bid={getBid} id={id} />}

@@ -4,12 +4,17 @@ import AddBatch from './components/AddBatch';
 import AddEsp from './components/AddEsp';
 import AddManu from './components/AddManu';
 import Addpic from './components/Addpic';
+import DataContext from './context/DataContext';
 // import Sidebar from './components/Sidebar';
 import './Dashboard.css';
 
 function Dashboard() {
+    const context = React.useContext(DataContext);
+    let { allManu } = context;
     const [style, setStyle] = React.useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
-
+    React.useEffect(() => {
+        allManu();
+    }, []);
     const changeStyle = () => {
         if (style == "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion") {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled");
@@ -479,13 +484,13 @@ function Dashboard() {
                                     {/*   <!-- Area Chart --> */}
                                     {/* <div className="col-xl-8 col-lg-7">
                                         <div className="card shadow mb-4"> */}
-                                            {/*  <!-- Card Header - Dropdown --> */}
-                                            {/* <div
+                                    {/*  <!-- Card Header - Dropdown --> */}
+                                    {/* <div
                                                 className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                                 <h6 className="m-0 font-weight-bold text-primary">Adding Manufacture</h6>
                                             </div> */}
-                                            {/*  <!-- Card Body --> */}
-                                            {/* <div className="card-body">
+                                    {/*  <!-- Card Body --> */}
+                                    {/* <div className="card-body">
                                                 <AddManu/>
                                             </div>
                                         </div>
@@ -498,14 +503,14 @@ function Dashboard() {
                                             <div
                                                 className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                                 <h6 className="m-0 font-weight-bold text-primary">Adding Manufacture</h6>
-                                                
+
                                             </div>
                                             {/*  <!-- Card Body --> */}
                                             <div className="card-body">
-                                                
+
                                                 <div className="mt-4 text-center small">
                                                     {/*  */}
-                                                    <AddManu/>
+                                                    <AddManu />
                                                 </div>
                                             </div>
                                         </div>
@@ -518,11 +523,11 @@ function Dashboard() {
                                             <div
                                                 className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                                 <h6 className="m-0 font-weight-bold text-primary">Adding Batch</h6>
-                                                
+
                                             </div>
                                             {/*  <!-- Card Body --> */}
                                             <div className="card-body">
-                                                
+
                                                 <div className="mt-4 text-center small">
                                                     {/*  */}
                                                     <AddBatch />
@@ -537,11 +542,11 @@ function Dashboard() {
                                             <div
                                                 className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                                 <h6 className="m-0 font-weight-bold text-primary">Adding Esp</h6>
-                                                
+
                                             </div>
                                             {/*  <!-- Card Body --> */}
                                             <div className="card-body">
-                                                
+
                                                 <div className="mt-4 text-center small">
                                                     {/*  */}
                                                     <AddEsp />
@@ -556,11 +561,11 @@ function Dashboard() {
                                             <div
                                                 className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                                 <h6 className="m-0 font-weight-bold text-primary">Adding Pic</h6>
-                                                
+
                                             </div>
                                             {/*  <!-- Card Body --> */}
                                             <div className="card-body">
-                                                
+
                                                 <div className="mt-4 text-center small">
                                                     {/*  */}
                                                     <Addpic />
@@ -576,48 +581,48 @@ function Dashboard() {
                                     {/*   <!-- Content Column --> */}
                                     <div className="col-lg-6 mb-4">
 
-                                        
+
 
                                         {/* <!-- Color System --> */}
                                         <div className="row">
                                             <div className="col-lg-6 mb-4">
                                                 <div className="card bg-primary text-white shadow">
-                                                    
+
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 mb-4">
                                                 <div className="card bg-success text-white shadow">
-                                                    
+
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 mb-4">
                                                 <div className="card bg-info text-white shadow">
-                                                    
+
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 mb-4">
                                                 <div className="card bg-warning text-white shadow">
-                                                    
+
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 mb-4">
                                                 <div className="card bg-danger text-white shadow">
-                                                    
+
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 mb-4">
                                                 <div className="card bg-secondary text-white shadow">
-                                                    
+
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 mb-4">
                                                 <div className="card bg-light text-black shadow">
-                                                    
+
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 mb-4">
                                                 <div className="card bg-dark text-white shadow">
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -632,7 +637,7 @@ function Dashboard() {
                                                 <h6 className="m-0 font-weight-bold text-primary">Illustrations</h6>
                                             </div>
                                             <div className="card-body">
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -661,7 +666,7 @@ function Dashboard() {
                 {/*  <!-- End of Page Wrapper -->
 
                                 <!-- Scroll to Top Button--> */}
- 
+
 
             </div>
         </div>
