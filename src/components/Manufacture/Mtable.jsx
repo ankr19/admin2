@@ -10,29 +10,17 @@ const Mtable = (props) => {
     let { allManu } = context;
     let { manuf, manufacturer } = props;
     
-    const [manu, setManu] = React.useState([]);
+    // // const [manu, setManu] = React.useState([]);
     React.useEffect(() => {
-        // allManu();
+        allManu();
 
-        setManu(manufacturer);
-    }, [manu])
+        // setManu(manufacturer;
+    }, [])
 
     const handleClick = (e) => {
         // console.log(e);
         manuf(e);
     }
-
-    // const addManuf = (value) => {
-    //     console.log('clicked--', value)
-    //     // let v = ++up;
-    //     // let date = moment(new Date()).format('DD/MM/yyyy, hh:mm:ss');
-    //     // let id = String("63e62d826e8f6d2ff8e5a28m"+v);
-    //     // console.log(name,"--",password,"--",date,"--",id);
-    //     // console.log({name:name,password:password,"Added Dated":date,id:id});
-    //     // // console.log(Mname,"--",password);
-    //     // setManu(manu.concat({name:name,password:password,"Added Dated":date,id:id}))
-    //     addManu(value);
-    // }
 
     return (
         <div className='container'>
@@ -49,10 +37,10 @@ const Mtable = (props) => {
                                 <th scope="col" colSpan="2">Added Dated</th>
                             </tr>
                         </thead>
-                        {manu.length !== 0 ?
+                        {manufacturer.length !== 0 ?
                             // if the data is present
                             <tbody>
-                                {manu.map((e, key) => {
+                                {manufacturer.map((e, key) => {
                                     return (<tr key={key}>
                                         <th scope="row">{++up}</th>
                                         <td colSpan="1">

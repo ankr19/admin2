@@ -8,16 +8,14 @@ import DataContext from '../../context/DataContext';
 
 const Manufacture = () => {
     const context = React.useContext(DataContext);
-    const { allManu, manufacturer } = context;
+    const { allManu, manufacturer,allBatchesForManufacturer } = context;
 
-
-
-    const [manufacture, setManufacture] = React.useState(manufacturer);
-    React.useEffect(() => {
-        allManu();
-    }, [manufacture])
 
     const [manu, setManu] = React.useState("");
+
+    // const [manufacture, setManufacture] = React.useState([]);
+    
+
     const [id, setId] = React.useState("");
     const [bid, setBid] = React.useState("");
     const [view, setView] = React.useState(false);
@@ -49,25 +47,32 @@ const Manufacture = () => {
         setManu(value.name);
         setId(value['_id']);
         if (view && (value.name == manu)) {
+            
             setView(false);
             setPview(false);
         }
         else {
             setView(true);
+            setPview(false);
         }
     }
 
     const getBid = (value) => {
         console.log(value);
         setBatch(value.name);
-        setBid(value.id);
+        setBid(value["_id"]);
         if (pview && (value.name == batch)) {
+            allBatchesForManufacturer({id:bid})
             setPview(false);
         }
         else {
             setPview(true);
         }
     }
+    React.useEffect(() => {
+        allManu();
+        // setManufacture(manufacturer);
+    }, [manu])
     return (
         <div>
             <div>

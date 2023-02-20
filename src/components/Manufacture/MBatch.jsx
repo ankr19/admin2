@@ -1,21 +1,21 @@
+import moment from 'moment';
 import React from 'react'
+import DataContext from '../../context/DataContext';
 import Batch from '../../JSON/Batch.json';
+import AddBatch from '../AddBatch';
 const MBatch = (props) => {
+    let context = React.useContext(DataContext);
+    let { allBatchesForManufacturer, Batches } = context;
     const { Mname, id, bid } = props;
     let up = 0;
-    const [batch, setBatch] = React.useState([]);
+    // const [batch, setBatch] = React.useState([]);
     const [pic, setPic] = React.useState("");
     React.useEffect(() => {
         console.log(id);
-        const ad = [];
-        Batch.batch.map((value) => {
-            if (id === value.mid) {
-                ad.push(value)
-            }
-        })
-        setBatch(ad);
-    }, [id])
-    const handleClick = (e) =>{
+        allBatchesForManufacturer({ id });
+        // console.log(batch);
+    }, [id, ])
+    const handleClick = (e) => {
         // console.log(e);
         bid(e);
     }
@@ -35,10 +35,10 @@ const MBatch = (props) => {
                                 <th scope="col" colSpan="2">Added Dated</th>
                             </tr>
                         </thead>
-                        {batch.length !== 0 ?
+                        {Batches.length !== 0 ?
                             // if the data is present
                             <tbody>
-                                {batch.map((e, key) => {
+                                {Batches.map((e, key) => {
                                     return (<tr key={key}>
                                         <th scope="row">{++up}</th>
                                         <td colSpan="1">
@@ -46,7 +46,7 @@ const MBatch = (props) => {
                                                 {e.name}
                                             </button>
                                         </td>
-                                        <td colSpan="2">{e['Added Dated']}</td>
+                                        <td colSpan="2">{moment(e['batchDate']).format("DD/MM/YYYY, HH:MM:SS")}</td>
                                     </tr>)
                                 })}
 
@@ -64,7 +64,26 @@ const MBatch = (props) => {
                         }
                     </table>
                 </div>
+                <div className="container">
+                <p>
+                    <button className="btn btn-primary mx-2" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#collapseExample2" 
+                    aria-expanded="false" 
+                    aria-controls="collapseExample2">
+                        Add Batch
+                    </button>
+                </p>
+                <div className="collapse container my-2" id="collapseExample2">
+                    <div class="card card-body">
+                        <AddBatch Mname={Mname} id={id} />
+                    </div>
+                </div>
             </div>
+            </div>
+            
+
         </div>
     )
 }
