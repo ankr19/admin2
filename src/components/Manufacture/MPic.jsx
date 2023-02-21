@@ -1,9 +1,10 @@
+import moment from 'moment/moment';
 import React from 'react'
 import DataContext from '../../context/DataContext';
 import Pic from '../../JSON/Pic.json';
 const MPic = (props) => {
     let context = React.useContext(DataContext);
-    let { allPicForBatches } = context;
+    let { allPicForBatches, Pics, update } = context;
     let { bid, Bname } = props;
     let up = 0;
     const [pic, setPic] = React.useState([]);
@@ -17,6 +18,8 @@ const MPic = (props) => {
             }
         })
         setPic(pd);
+        console.log(Pics);
+        console.log(update);
     }, [bid])
     return (
         <div>
@@ -25,7 +28,8 @@ const MPic = (props) => {
                     <h6 className="m-0 font-weight-bold text-primary">Pic Details</h6>
                 </div>
                 <div className="card-body">
-                    <label htmlFor="Mname" className='col-form-label primary'> Batch Name: {Bname}</label>
+                    <label htmlFor="Mname" className='col-form-label primary'> Batch Name: {Pics.name || "NA"}</label> <br/>
+                    <label htmlFor="Mname" className='col-form-label primary'> Added date: {moment(Pics['batchDate']).format("DD/MM/YYYY, HH:MM:SS") || "NA"}</label>
                     <table className="table table-striped">
                         <thead>
                             <tr>
@@ -36,20 +40,20 @@ const MPic = (props) => {
                                 <th scope="col" colSpan="2">Added Dated</th>
                             </tr>
                         </thead>
-                        {pic.length !== 0 ?
+                        {update.length !== 0 ?
                             // if the data is present
                             <tbody>
-                                {pic.map((e, key) => {
+                                {update.map((e, key) => {
                                     return (<tr key={key}>
                                         <th scope="row">{++up}</th>
                                         <td colSpan="2">
                                             <button className='btn btn-outline-primary'>
-                                                {e.picname}
+                                                {e.picId}
                                             </button>
                                         </td>
-                                        <td colSpan="1">{e['pre-V']}</td>
-                                        <td colSpan="1">{e['Upd-V']}</td>
-                                        <td colSpan="2">{e['Update Dated']}</td>
+                                        <td colSpan="1">{e['prevBinVersion']?.v}</td>
+                                        <td colSpan="1">{e['binVersion']?.v}</td>
+                                        <td colSpan="2">{e['otaDate']||"NA"}</td>
                                     </tr>)
                                 })}
 

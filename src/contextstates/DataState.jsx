@@ -6,6 +6,7 @@ const DataState = (props) => {
     const [manufacturer, setManufacturer] = React.useState([])
     const [Batches, setBatches] = React.useState([]);
     const [Pics, setPics] = React.useState([]);
+    const [update, setUpdate] = React.useState([]);
     let api = 'http://localhost:5001/api/v1/';
     let config = {
         headers: {
@@ -39,7 +40,7 @@ const DataState = (props) => {
         console.log(config);
         //getBatchesforManufacturer?manufacturerId=63f318927ca01c2164b23f78
         const response = await axios.get(`${api}getBatchesforManufacturer`, config);
-        console.log(response.data.body);
+        // console.log(response.data.body);
         setBatches(response.data.body);
     }
 
@@ -51,23 +52,27 @@ const DataState = (props) => {
             manufacturerId: value.id,
         }
         const response = await axios.post(`${api}addSingleBatch`, data, config)
-        console.log(response.data);
+        // console.log(response.data);
         allBatchesForManufacturer(value);
     }
 
     let allPicForBatches = async (value) => {
-        console.log(value);
-        let data = {
-            batchId: value.id
+        let obj = []
+        // console.log(value);
+        config['params'] = {
+            id: value.id
         }
-        // const response = await axios.post(`${api}getPicsforBatches`, data, config);
-        // console.log(response.data);
-        // console.log(response.data);
+        const response = await axios.get(`${api}getPicsforBatches`, config);
+        let projectedPics = response.data.body;
+        obj = projectedPics.projectedPics.projectedPics
+        // console.log(response.data.body);
+        setUpdate(obj);
+        setPics(projectedPics.singleBatch);
     }
 
 
     return (
-        <DataContext.Provider value={{ addManu, allManu, manufacturer, AddBatches, allBatchesForManufacturer, Batches, allPicForBatches, }}>
+        <DataContext.Provider value={{ addManu, allManu, manufacturer, AddBatches, allBatchesForManufacturer, Batches, allPicForBatches, Pics, update, }}>
             {props.children}
         </DataContext.Provider>
     )
