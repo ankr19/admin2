@@ -1,22 +1,26 @@
 import React from 'react'
+import DataContext from '../../context/DataContext';
 import Pic from '../../JSON/Pic.json';
 const MPic = (props) => {
-    let {bid, Bname} = props;
+    let context = React.useContext(DataContext);
+    let { allPicForBatches } = context;
+    let { bid, Bname } = props;
     let up = 0;
     const [pic, setPic] = React.useState([]);
-    React.useEffect(()=>{
+    React.useEffect(() => {
         console.log(bid);
         const pd = [];
-        Pic.pic.map((value)=>{
-          if(bid == value.bid){
-            pd.push(value);
-          }
+        allPicForBatches({name:})
+        Pic.pic.map((value) => {
+            if (bid == value.bid) {
+                pd.push(value);
+            }
         })
         setPic(pd);
-    },[bid])
-  return (
-    <div>
-        <div className="card shadow mb-4">
+    }, [bid])
+    return (
+        <div>
+            <div className="card shadow mb-4">
                 <div className="card-header py-3">
                     <h6 className="m-0 font-weight-bold text-primary">Pic Details</h6>
                 </div>
@@ -66,8 +70,8 @@ const MPic = (props) => {
                     </table>
                 </div>
             </div>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default MPic

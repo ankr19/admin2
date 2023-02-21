@@ -5,6 +5,7 @@ import DataContext from '../context/DataContext'
 const DataState = (props) => {
     const [manufacturer, setManufacturer] = React.useState([])
     const [Batches, setBatches] = React.useState([]);
+    const [Pics, setPics] = React.useState([]);
     let api = 'http://localhost:5001/api/v1/';
     let config = {
         headers: {
@@ -53,8 +54,21 @@ const DataState = (props) => {
         console.log(response.data);
         allBatchesForManufacturer(value);
     }
+
+    let allPicForBatches = async (value) => {
+        console.log(value);
+        let data = {
+            name: value.name,
+            batchId: value.id
+        }
+        const response = await axios.post(`${api}addSinglePic`, data, config);
+        console.log(response.data);
+        // console.log(response.data);
+    }
+
+
     return (
-        <DataContext.Provider value={{ addManu, allManu, manufacturer, AddBatches, allBatchesForManufacturer, Batches, }}>
+        <DataContext.Provider value={{ addManu, allManu, manufacturer, AddBatches, allBatchesForManufacturer, Batches, allPicForBatches, }}>
             {props.children}
         </DataContext.Provider>
     )
