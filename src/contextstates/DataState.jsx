@@ -71,11 +71,30 @@ const DataState = (props) => {
     }
 
     // deleting the manufactuer
-    
+    const deleteManu = async (value) => {
+        console.log(value);
+        config['params'] = {
+            "mid": value
+        }
+        const response = await axios.delete(`${api}deleteManufacturer`, config); 
+        console.log(response.data)
+        allManu();
+    }
+
+    const deleteBatch = async (value) => {
+        console.log(value);
+        config['params'] ={
+            bid: value.bid,
+        }
+        // console.log(config);
+        const response = await axios.delete(`${api}deleteBatch`, config)
+        console.log(response.data);
+        allBatchesForManufacturer({id: value.id});
+    }
 
 
     return (
-        <DataContext.Provider value={{ addManu, allManu, manufacturer, AddBatches, allBatchesForManufacturer, Batches, allPicForBatches, Pics, update, }}>
+        <DataContext.Provider value={{ addManu, allManu, manufacturer, AddBatches, allBatchesForManufacturer, Batches, allPicForBatches, Pics, update, deleteManu, deleteBatch, }}>
             {props.children}
         </DataContext.Provider>
     )

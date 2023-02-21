@@ -5,7 +5,7 @@ import Batch from '../../JSON/Batch.json';
 import AddBatch from '../AddBatch';
 const MBatch = (props) => {
     let context = React.useContext(DataContext);
-    let { allBatchesForManufacturer, Batches } = context;
+    let { allBatchesForManufacturer, Batches, deleteBatch } = context;
     const { Mname, id, bid } = props;
     let up = 0;
     // const [batch, setBatch] = React.useState([]);
@@ -18,6 +18,11 @@ const MBatch = (props) => {
     const handleClick = (e) => {
         // console.log(e);
         bid(e);
+    }
+
+    const handleClick2 = (e)=>{
+        // console.log(e['_id'], id);
+        deleteBatch({bid: e['_id'], id: id})
     }
     return (
         <div>
@@ -47,6 +52,7 @@ const MBatch = (props) => {
                                             </button>
                                         </td>
                                         <td colSpan="2">{moment(e['batchDate']).format("DD/MM/YYYY, HH:MM:SS")}</td>
+                                        <td colSpan="1"><button className='btn btn-outline-secondary' onClick={()=>handleClick2(e)}>delete</button></td>
                                     </tr>)
                                 })}
 

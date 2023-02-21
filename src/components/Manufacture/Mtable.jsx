@@ -7,7 +7,7 @@ const Mtable = (props) => {
     let up = 0;
 
     const context = React.useContext(DataContext);
-    let { allManu } = context;
+    let { allManu, deleteManu } = context;
     let { manuf, manufacturer } = props;
     
     // // const [manu, setManu] = React.useState([]);
@@ -20,6 +20,11 @@ const Mtable = (props) => {
     const handleClick = (e) => {
         // console.log(e);
         manuf(e);
+    }
+
+    const handleClick2 = (e) =>{
+        // console.log(e['_id']);
+        deleteManu(e['_id'])
     }
 
     return (
@@ -50,7 +55,7 @@ const Mtable = (props) => {
                                         </td>
                                         <td colSpan="2">{moment(e['addedDate']).format('DD/MM/YYYY, HH:MM:SS')}</td>
                                         {/* <i className="bi bi-trash3-fill"></i> */}
-                                        <td colSpan="1"><button className='btn btn-outline-secondary'>delete<i className="bi bi-trash3-fill"></i></button></td>
+                                        <td colSpan="1"><button className='btn btn-outline-secondary' onClick={()=>{handleClick2(e)}}>delete<i className="bi bi-trash3-fill"></i></button></td>
                                     </tr>)
                                 })}
 
