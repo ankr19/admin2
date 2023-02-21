@@ -49,6 +49,8 @@ const Mtable = (props) => {
                                             </button>
                                         </td>
                                         <td colSpan="2">{moment(e['addedDate']).format('DD/MM/YYYY, HH:MM:SS')}</td>
+                                        {/* <i className="bi bi-trash3-fill"></i> */}
+                                        <td colSpan="1"><button className='btn btn-outline-secondary'>delete<i className="bi bi-trash3-fill"></i></button></td>
                                     </tr>)
                                 })}
 
@@ -72,7 +74,7 @@ const Mtable = (props) => {
                     </button>
                 </p>
                 <div className="collapse container my-2" id="collapseExample">
-                    <div class="card card-body">
+                    <div className="card card-body">
                         <AddManu />
                     </div>
                 </div>

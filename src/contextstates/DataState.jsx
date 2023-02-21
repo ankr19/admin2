@@ -70,6 +70,9 @@ const DataState = (props) => {
         setPics(projectedPics.singleBatch);
     }
 
+    // deleting the manufactuer
+    
+
 
     return (
         <DataContext.Provider value={{ addManu, allManu, manufacturer, AddBatches, allBatchesForManufacturer, Batches, allPicForBatches, Pics, update, }}>
