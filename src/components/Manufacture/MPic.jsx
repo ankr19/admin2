@@ -10,7 +10,7 @@ const MPic = (props) => {
     React.useEffect(() => {
         console.log(bid);
         const pd = [];
-        allPicForBatches({name:})
+        allPicForBatches({id:bid})
         Pic.pic.map((value) => {
             if (bid == value.bid) {
                 pd.push(value);

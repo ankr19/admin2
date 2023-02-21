@@ -58,11 +58,10 @@ const DataState = (props) => {
     let allPicForBatches = async (value) => {
         console.log(value);
         let data = {
-            name: value.name,
             batchId: value.id
         }
-        const response = await axios.post(`${api}addSinglePic`, data, config);
-        console.log(response.data);
+        // const response = await axios.post(`${api}getPicsforBatches`, data, config);
+        // console.log(response.data);
         // console.log(response.data);
     }
 
