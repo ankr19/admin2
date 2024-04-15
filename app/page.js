@@ -3,11 +3,37 @@ import Image from "next/image";
 import React from "react";
 import { sendMailer } from "@/lib/email";
 import AddComponents from "@/components/AddComponents";
+import { Bounce, toast } from "react-toastify";
 
 export default function Home() {
   const [add, setAdd] = React.useState([0]);
   const handleSend = async () => {
-    await sendMailer("value");
+    let val = await sendMailer("value");
+    if (val) {
+      toast.success("Main has sent", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else {
+      toast.warning("Mail has not been sent", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
   };
 
   const handleCancel = (val) => {
