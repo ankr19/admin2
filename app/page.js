@@ -8,6 +8,7 @@ import { Bounce, toast } from "react-toastify";
 export default function Home() {
   const [add, setAdd] = React.useState([0]);
   const handleSend = async () => {
+    console.log('clicked sending mail')
     let val = await sendMailer("value");
     if (val) {
       toast.success("Main has sent", {
@@ -36,6 +37,7 @@ export default function Home() {
     }
   };
 
+  
   const handleCancel = (val) => {
     // console.log(val);
     const newArray = [...add.slice(0, val), ...add.slice(val + 1)];
